@@ -13,13 +13,22 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
   
         <div class="container">
-            <div class="jumbotron">
-
-                <h1>Retreived info for {{form_data.username}}</h1>   
-                {% if form_data %}             
+            <div class="jumboton">
+                
+                {% if form_data %}  
+                <div class="alert alert-success alert-dismissible">
+                    <h1>Retreived info for {{form_data.username}}</h1>      
+                </div>
+                        
                    {% for key,value in form_data.items() %}                   
                         <h3>{{key}} = {{value}}</h3>
                    {% endfor %}
+                
+                {% else %}
+                <div class="alert alert-danger alert-dismissible fade show">
+                    <h3>Sorry!! username not found</h3>  
+                </div>
+                                  
                 {% endif %}
                        
                     

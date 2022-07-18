@@ -37,7 +37,10 @@ def login():
         with open(filename,"w") as f:
             f.write(response.text)
         f.close
-        data_fetched = fetch_data(username,response.text)
+        if re.search('Not\s+found',str(response.text),re.I|re.S):
+            data_fetched={}
+        else:
+            data_fetched = fetch_data(username,response.text)
         return render_template('process.html',form_data = data_fetched) 
     
 
