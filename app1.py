@@ -9,8 +9,12 @@ app1 = Flask(__name__)
 
 def fetch_data(username,contents):
     data_fetched={}
+    fullname=''
+    repo_num=''
+    total_contrib=0
     soup = BeautifulSoup(contents,"html.parser")
-    repo = soup.find('a',href=re.compile(r'/anjaligeop\?tab=repositories'))
+    gitname = fullname = soup.find('span',attrs={"itemprop":"additionalName"}).text.strip()
+    repo = soup.find('a',href=re.compile(r'/'+gitname+'\?tab=repositories'))
     repo_num = repo.find('span').text
     contributions = soup.find('h2',text=re.compile(r'(\d+)\s+contributions\s+in\s+the\s+last\s+year')).text
     total_contrib = re.search(r'\d+',contributions).group(0)
@@ -34,7 +38,7 @@ def login():
             f.write(response.text)
         f.close
         data_fetched = fetch_data(username,response.text)
-        return render_template('process.html',form_data = request.form) 
+        return render_template('process.html',form_data = data_fetched) 
     
 
 

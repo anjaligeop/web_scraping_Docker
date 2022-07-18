@@ -14,9 +14,13 @@
   
         <div class="container">
             <div class="jumbotron">
-                <h1>Retreived info</h1>                
-                   
 
+                <h1>Retreived info for {{form_data.username}}</h1>   
+                {% if form_data %}             
+                   {% for key,value in form_data.items() %}                   
+                        <h3>{{key}} = {{value}}</h3>
+                   {% endfor %}
+                {% endif %}
                        
                     
             </div>
